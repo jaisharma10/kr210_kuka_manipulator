@@ -6,8 +6,8 @@ from launch_ros.actions import Node
 from scripts import GazeboRosPaths
 
 def generate_launch_description():
-    package_share_dir = get_package_share_directory("kuka_kr210_arm")
-    urdf_file = os.path.join(package_share_dir, "urdf", "new_kr210.urdf")
+    package_share_dir = get_package_share_directory("kr210_kuka_manipulator")
+    urdf_file = os.path.join(package_share_dir, "urdf", "kr210_gazebo.urdf")
 
     return LaunchDescription(
         [

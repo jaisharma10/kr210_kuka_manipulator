@@ -5,9 +5,9 @@ import os
 
 
 def generate_launch_description():
-    
-    pkg_description = get_package_share_directory('kuka_kr210_arm')
-    urdf_file = os.path.join(pkg_description, "urdf", 'kr210.urdf')   
+
+    pkg_description = get_package_share_directory('kr210_kuka_manipulator')
+    urdf_file = os.path.join(pkg_description, "urdf", 'kr210_rviz.urdf')   
 
     joint_state_publisher_node = Node(
         package="joint_state_publisher_gui",
