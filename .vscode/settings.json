@@ -1,0 +1,13 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/jaisharma/ws/dev_ws/install/rover_pkg/lib/python3.8/site-packages",
+        "/home/jaisharma/ws/dev_ws/install/robot_arm/lib/python3.8/site-packages",
+        "/home/jaisharma/ws/dev_ws/install/prius_line_following/lib/python3.8/site-packages",
+        "/home/jaisharma/ws/dev_ws/install/my_python_pkg/lib/python3.8/site-packages",
+        "/home/jaisharma/ws/dev_ws/install/kuka_kr210_arm/lib/python3.8/site-packages",
+        "/home/jaisharma/ws/dev_ws/install/kr210_kuka_manipulator/lib/python3.8/site-packages",
+        "/home/jaisharma/ws/dev_ws/install/farmbot/lib/python3.8/site-packages",
+        "/home/jaisharma/ws/dev_ws/install/big_bazu/lib/python3.8/site-packages",
+        "/opt/ros/foxy/lib/python3.8/site-packages"
+    ]
+}
