@@ -27,7 +27,10 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'my_node = kr210_kuka_manipulator.my_node:main'
+            'my_node = kr210_kuka_manipulator.my_node:main',
+            'trajectory_exec = kr210_kuka_manipulator.1_controller_test:main',
+            'inverse_kinematics = kr210_kuka_manipulator.2_inverse_kinematics_solution:main',
+            'sqaure_actionClient = kr210_kuka_manipulator.3_action_client_interface:main',
         ],
     },
 )
