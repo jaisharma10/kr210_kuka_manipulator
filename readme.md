@@ -17,6 +17,11 @@ IKPY python library is used to calculate forward and inverse kinematics solution
   <img src = "media/kuka_kr210_img.jpg" height = "320" >
 </p>
 
+<p align="center">
+  <video src= "media/gazebo_IK.mp4" width = "180" >
+
+</p>
+
  &nbsp;
 
 # System Requirements
@@ -39,6 +44,8 @@ IKPY python library is used to calculate forward and inverse kinematics solution
     source "your_colcon_workspace"/install/setup.bash
 ```
  &nbsp;
+
+
 
 # General Launch Files
 
@@ -85,6 +92,11 @@ The command below uses an action-client to enable the manipulator to follow a Tr
 ```
 
 &nbsp;
+
+# Video Output
+
+https://user-images.githubusercontent.com/87094729/220734806-bde3d30b-5433-4811-b34f-0f7699ea7512.mp4
+
 
 
 # License
