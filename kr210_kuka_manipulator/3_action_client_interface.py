@@ -1,5 +1,13 @@
 #! /usr/bin/env python
 
+__author__ = 'jaisharm@umd.edu (jai)'
+__maintainer__ = 'jaisharm@umd.edu (jai)'
+
+'''
+Creates an Action Client interface that enables the manipulator to
+follow a Trajectory that represents a planar SQUARE in 3D-Space
+'''
+
 import sys
 import rclpy
 from rclpy.duration import Duration
@@ -12,20 +20,34 @@ import ikpy.chain
 import numpy as np 
 import os 
 
-class Trajectory_actionClient(Node):
+class TrajectoryActionClient(Node):
 
     def __init__(self):
-        super().__init__('Trajectory_actionclient')
+        super().__init__('TrajectoryActionClient') # Node name
+        
+        # create an action client
+        # action type: FollowJointTrajectory
+        # action name: '/joint_trajectory_controller/follow_joint_trajectory'
         self._action_client = ActionClient(self, FollowJointTrajectory, '/joint_trajectory_controller/follow_joint_trajectory')
-        package_share_dir = get_package_share_directory("kr210_kuka_manipulator")
-        urdf_file= os.path.join(package_share_dir, "urdf", "kr210_gazebo.urdf")
-        self.robot_initialize(urdf_file)
+
+        package_path = get_package_share_directory('kr210_kuka_manipulator')
+        urdf_path = os.path.join(package_path, "urdf", 'kr210_gazebo.urdf')  
+    
+        self.robot_initialize(urdf_path)
 
     def send_goal(self):
         goal_msg = FollowJointTrajectory.Goal()
-        joint_names =['joint_1','joint_2','joint_3','joint_4','joint_5','joint_6','left_gripper_finger_joint','right_gripper_finger_joint']
+        joint_names = ['joint_1','joint_2','joint_3',
+                       'joint_4','joint_5','joint_6', 
+                       'left_gripper_finger_joint',
+                       'right_gripper_finger_joint']
+        
+        # use a stack to collect trajectory points
+        # define multiple JointTrajectoryPoint positions and append to stack
+        # the positions are calculated with IK by processing End Effector Goals
 
-        points = []
+        points = []        
+        
         point1 = JointTrajectoryPoint()
         angles=self.kuka_robot.inverse_kinematics([1.87,-0.1,1.64])
         angles=np.delete(angles, [0,7,8])
@@ -61,7 +83,7 @@ class Trajectory_actionClient(Node):
         points.append(point4)
         # points.append(point5)
 
-
+        # parse all the points to the Action Client
         goal_msg.goal_time_tolerance = Duration(seconds=15, nanoseconds=0).to_msg()
         goal_msg.trajectory.joint_names = joint_names
         goal_msg.trajectory.points = points
@@ -69,17 +91,15 @@ class Trajectory_actionClient(Node):
         self._send_goal_future = self._action_client.send_goal_async(goal_msg, feedback_callback=self.feedback_callback)
         self._send_goal_future.add_done_callback(self.goal_response_callback)
     
-    def robot_initialize(self,urdf_file):
-        self.kuka_robot = ikpy.chain.Chain.from_urdf_file(urdf_file)
+    def robot_initialize(self,urdf_path):
+        self.kuka_robot = ikpy.chain.Chain.from_urdf_file(urdf_path)
 
     def goal_response_callback(self, future):
         goal_handle = future.result()
         if not goal_handle.accepted:
             self.get_logger().info('\nGoal rejected :(')
             return
-
         self.get_logger().info('\n\nGoal accepted :)\n')
-
         self._get_result_future = goal_handle.get_result_async()
         self._get_result_future.add_done_callback(self.get_result_callback)
     
@@ -91,15 +111,11 @@ class Trajectory_actionClient(Node):
     def feedback_callback(self, feedback_msg):
         feedback = feedback_msg.feedback
 
-    
-
 def main(args=None):
-    
     rclpy.init()
-    action_client_interface = Trajectory_actionClient()
+    action_client_interface = TrajectoryActionClient()
     future = action_client_interface.send_goal()
     rclpy.spin(action_client_interface)
-
 
 if __name__ == '__main__':
     main()
