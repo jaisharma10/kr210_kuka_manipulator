@@ -25,7 +25,7 @@ class TrajectoryActionClient(Node):
     def __init__(self):
         super().__init__('TrajectoryActionClient') # Node name
         
-        # create an action client
+        # create an Action Client
         # action type: FollowJointTrajectory
         # action name: '/joint_trajectory_controller/follow_joint_trajectory'
         self._action_client = ActionClient(self, FollowJointTrajectory, '/joint_trajectory_controller/follow_joint_trajectory')
@@ -83,7 +83,7 @@ class TrajectoryActionClient(Node):
         points.append(point4)
         # points.append(point5)
 
-        # parse all the points to the Action Client
+        # feed all the points to the Action Client
         goal_msg.goal_time_tolerance = Duration(seconds=15, nanoseconds=0).to_msg()
         goal_msg.trajectory.joint_names = joint_names
         goal_msg.trajectory.points = points
