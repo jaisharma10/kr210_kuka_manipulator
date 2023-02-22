@@ -7,7 +7,9 @@ To build a ROS2 Manipulator simulation that uses forward and inverse kinematics 
 
 A KUKA KR210 robot arm is used. It has 6 degrees of freedom. For this project, Position, Effort and Joint Trajectory controllers are taken from the ros_conotrol package.
 
-IKPY python library is used to calculate forward and inverse kinematics solutions with the help of user input.
+IKPY python library is used to calculate forward and inverse kinematics solutions with the help of user input. The inverse_kinematics script can process  4 command line arguments as inputs. The arguments are the end effector cartesian position [x, y, z] and the gripper status [o, c] for open and closed. 
+
+&nbsp;
 
 <p align="center">
   <img src = "media/kr210_rviz.png" height = "320" >
