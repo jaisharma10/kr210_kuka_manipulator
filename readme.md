@@ -63,19 +63,27 @@ Start the complete Launch File
 &nbsp;
 
 ## Inverse Kinematics
-The manipulator will compute the trajectory to go to a Goal End Effector position and enable the robot to follow 
-the generated trajectory. The command needs 4 input command line arguments. The arguments are the end effector cartesian position [x, y, z] and the gripper position [o, c]. Run the command in a new terminal
+The script will compute the trajectory to go to a Goal End Effector position. It will then enable the robot to follow 
+the generated trajectory. The command needs 4 command line arguments as inputs. The arguments are the end effector cartesian position [x, y, z] and the gripper position [o, c]. Run the command in a new terminal
+
+&nbsp;
+
 ```
   ros2 run kr210_kuka_manipulator inverse_kinematics 1.5 2.0 1.0 o
 ```
-
- &nbsp;
+&nbsp;
 
 ## Square Motion Planning
 The command below uses an action-client to enable the manipulator to follow a Trajectory that represents a planar SQUARE in 3D-Space. Call the following run command 
+
+&nbsp;
+
 ```
   ros2 run kr210_kuka_manipulator sqaure_actionClient
 ```
+
+&nbsp;
+
 
 # License
 
